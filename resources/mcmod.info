@@ -1,0 +1,16 @@
+[
+{
+  "modid": "douromod",
+  "name": "Douro Mod",
+  "description": "Try to make true of Douro Land in Minecraft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["zhengxiaoyao0716"],
+  "credits": "(C)zhengxiaoyao0716",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

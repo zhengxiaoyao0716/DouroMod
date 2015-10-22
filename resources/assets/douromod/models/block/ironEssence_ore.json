@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "douromod:blocks/ironEssence_ore"
+    }
+}
