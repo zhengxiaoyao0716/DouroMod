@@ -19,21 +19,20 @@ public class DouroMod
     public static final String VERSION = "0.0.0";
 
     /**CreativeTabs*/
-    public static CreativeTabs anqi;//TODO 翻译
-    public static CreativeTabs soulBeast;
+    public static CreativeTabs hiddenWeapons;   //暗器标签
 
     /**Block*/
-    public static Block ironEssenceOre;     //铁母矿
+    public static Block ironEssenceOre;         //铁母矿
 
     /**Item*/
-    public static Item ironEssence;         //铁母
-    public static Item sleeveBow;           //袖箭（发射器部分）
+    public static Item ironEssence;             //铁母
+    public static Item sleeveBow;               //袖箭（发射器部分）
 
-    /**SoulBeast*/
-    public static Entity blueShineGrass;    //蓝银草
+    /**Entity*/
+    public static Entity blueShineGrass;        //蓝银草
 
-    @SidedProxy(clientSide = "com.zhengxiaoyao0716.douromod.ClientProxy",
-            serverSide = "com.zhengxiaoyao0716.douromod.CommonProxy")
+    /**Proxy*/
+    @SidedProxy(clientSide = "com.zhengxiaoyao0716.douromod.ClientProxy", serverSide = "com.zhengxiaoyao0716.douromod.CommonProxy")
     public static CommonProxy proxy;
 
     @EventHandler

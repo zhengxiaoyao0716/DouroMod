@@ -14,28 +14,31 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
 public class SleeveBow extends ItemBow {
+    /**
+     * 构造器.
+     */
     public SleeveBow()
     {
         this.setUnlocalizedName("sleeveBow")
-                .setCreativeTab(CreativeTabs.tabCombat)
+                .setCreativeTab(DouroMod.hiddenWeapons)
                 .setMaxDamage(2);   //根据斗罗大陆原著，袖箭只有三次发射机会
     }
 
     /**
      * 袖箭不同力度的模型.
-     * @param stack 物品栈
-     * @param player 玩家�
+     * @param itemStack 物品栈
+     * @param player 玩家
      * @param useRemaining 右键持续按住的时间
      * @return 模型资源的位置
      */
     @Override
-    public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining) {
+    public ModelResourceLocation getModel(ItemStack itemStack, EntityPlayer player, int useRemaining) {
         ModelResourceLocation modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow", "inventory");
-        useRemaining = 36000 - useRemaining;
+        useRemaining = this.getMaxItemUseDuration(itemStack) - useRemaining;
         if(player.getItemInUse() != null) {
-            if(useRemaining >= 18) {
+            if(useRemaining >= 6) {
                 modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_2", "inventory");
-            } else if(useRemaining > 13) {
+            } else if(useRemaining > 4) {
                 modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_1", "inventory");
             } else if(useRemaining > 0) {
                 modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_0", "inventory");
@@ -91,9 +94,10 @@ public class SleeveBow extends ItemBow {
         //if (flag || playerIn.inventory.hasItem(Items.arrow))
         //{
         float f = (float)j / 20.0F;
-        f = (f * f + f * 2.0F) / 3.0F;
-
-        if ((double)f < 0.1D)
+        //f设为了原来的两倍（去掉了/3.0F），这样可以更快的到达必杀点
+        f = (f * f + f * 2.0F);
+        //但不代表可以立刻发射，所以发射起点x3倍以补偿
+        if ((double)f < 0.3D)
         {
             return;
         }
@@ -104,7 +108,7 @@ public class SleeveBow extends ItemBow {
         }
 
         EntityArrow entityarrow = new EntityArrow(worldIn, playerIn, f * 2.0F);
-        //袖箭威力暂时设置为普通弓箭10倍
+        //袖箭威力暂时设置为普通弓箭10倍，因为机括类暗器发射应该更快捷
         entityarrow.setDamage(20.0D);
 
         if (f == 1.0F)
@@ -132,7 +136,8 @@ public class SleeveBow extends ItemBow {
         }
         //每次攻击消耗一次机会
         stack.damageItem(1, playerIn);
-        worldIn.playSoundAtEntity(playerIn, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+        //无声袖箭
+        //worldIn.playSoundAtEntity(playerIn, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
         //if (flag)
         //{

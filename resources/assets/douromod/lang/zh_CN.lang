@@ -1,6 +1,9 @@
-itemGroup.soulBeast.name=Soul Beast
+itemGroup.hiddenWeapons=暗器
 
 tile.ironEssenceOre.name=铁母矿
 
 item.ironEssence.name=铁母
 item.sleeveBow.name=袖箭
+
+douromod.keytitle=斗罗模组
+douromod.key.douroSwitchKey=斗罗开关

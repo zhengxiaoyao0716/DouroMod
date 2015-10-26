@@ -1,6 +1,9 @@
-itemGroup.soulBeast.name=Soul Beast
+itemGroup.hiddenWeapons=Hidden Weapons
 
 tile.ironEssenceOre.name=Iron Essence Ore
 
 item.ironEssence.name=Iron Essence
 item.sleeveBow.name=Sleeve Bow
+
+douromod.keytitle=Douro Mod
+douromod.key.douroSwitchKey=Douro Switch
