@@ -1,4 +1,4 @@
-package com.zhengxiaoyao0716.douromod.blocks;
+package com.zhengxiaoyao0716.douromod.block;
 
 import com.zhengxiaoyao0716.douromod.DouroMod;
 import net.minecraft.init.Blocks;

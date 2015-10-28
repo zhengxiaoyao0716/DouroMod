@@ -1,15 +1,13 @@
 package com.zhengxiaoyao0716.douromod;
 
-import com.zhengxiaoyao0716.douromod.blocks.DouroOreGen;
-import com.zhengxiaoyao0716.douromod.blocks.IronEssenceOre;
-import com.zhengxiaoyao0716.douromod.items.IronEssence;
-import com.zhengxiaoyao0716.douromod.items.SleeveBow;
+import com.zhengxiaoyao0716.douromod.block.IronEssenceOre;
+import com.zhengxiaoyao0716.douromod.item.IronEssence;
+import com.zhengxiaoyao0716.douromod.item.SleeveBow;
 import com.zhengxiaoyao0716.douromod.world.DouroWorldGenerator;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

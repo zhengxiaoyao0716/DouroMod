@@ -1,10 +1,7 @@
-package com.zhengxiaoyao0716.douromod.items;
+package com.zhengxiaoyao0716.douromod.item;
 
 import com.zhengxiaoyao0716.douromod.DouroMod;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
@@ -22,38 +19,6 @@ public class SleeveBow extends ItemBow {
         this.setUnlocalizedName("sleeveBow")
                 .setCreativeTab(DouroMod.hiddenWeapons)
                 .setMaxDamage(2);   //根据斗罗大陆原著，袖箭只有三次发射机会
-    }
-
-    /**
-     * 袖箭不同力度的模型.
-     * @param itemStack 物品栈
-     * @param player 玩家
-     * @param useRemaining 右键持续按住的时间
-     * @return 模型资源的位置
-     */
-    @Override
-    public ModelResourceLocation getModel(ItemStack itemStack, EntityPlayer player, int useRemaining) {
-        ModelResourceLocation modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow", "inventory");
-        useRemaining = this.getMaxItemUseDuration(itemStack) - useRemaining;
-        if(player.getItemInUse() != null) {
-            if(useRemaining >= 6) {
-                modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_2", "inventory");
-            } else if(useRemaining > 4) {
-                modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_1", "inventory");
-            } else if(useRemaining > 0) {
-                modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_0", "inventory");
-            }
-        }
-        return modelResourceLocation;
-    }
-    /**
-     * 袖箭发射应该比普通弓弩稍快，即延时更低.
-     * @param stack 物品栈
-     * @return
-     */
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
-        return 36000;
     }
 
     /**
@@ -77,15 +42,40 @@ public class SleeveBow extends ItemBow {
         return itemStackIn;
     }
     /**
+     * 袖箭不同力度的模型.
+     * @param itemStack 物品栈
+     * @param player 玩家
+     * @param useRemaining 右键持续按住的时间
+     * @return 模型资源的位置
+     */
+    @Override
+    public ModelResourceLocation getModel(ItemStack itemStack, EntityPlayer player, int useRemaining) {
+        ModelResourceLocation modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow", "inventory");
+        useRemaining = this.getMaxItemUseDuration(itemStack) - useRemaining;
+        if(player.getItemInUse() != null) {
+            if(useRemaining >= 6) {
+                modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_2", "inventory");
+            } else if(useRemaining > 3) {
+                modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_1", "inventory");
+            } else if(useRemaining > 0) {
+                modelResourceLocation = new ModelResourceLocation(DouroMod.MODID + ":sleeveBow_pulling_0", "inventory");
+            }
+        }
+        return modelResourceLocation;
+    }
+    /**
      * 当玩家松开右键，发射箭矢
      * @param timeLeft The amount of ticks left before the using would have been complete
      */
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft)
     {
         int j = this.getMaxItemUseDuration(stack) - timeLeft;
+        //不用发出ArrowLooseEvent事件广播
+        /*
         net.minecraftforge.event.entity.player.ArrowLooseEvent event = new net.minecraftforge.event.entity.player.ArrowLooseEvent(playerIn, stack, j);
         if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return;
         j = event.charge;
+        */
 
         //袖箭箭矢就是其本身，无需创造模式或者附魔效果
         //boolean flag = playerIn.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
@@ -115,7 +105,8 @@ public class SleeveBow extends ItemBow {
         {
             entityarrow.setIsCritical(true);
         }
-
+        //附魔效果全部去除
+        /*
         int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, stack);
 
         if (k > 0)
@@ -134,6 +125,7 @@ public class SleeveBow extends ItemBow {
         {
             entityarrow.setFire(100);
         }
+        */
         //每次攻击消耗一次机会
         stack.damageItem(1, playerIn);
         //无声袖箭

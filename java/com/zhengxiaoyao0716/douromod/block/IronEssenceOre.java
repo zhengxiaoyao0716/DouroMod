@@ -1,4 +1,4 @@
-package com.zhengxiaoyao0716.douromod.blocks;
+package com.zhengxiaoyao0716.douromod.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

@@ -1,4 +1,4 @@
-package com.zhengxiaoyao0716.douromod.items;
+package com.zhengxiaoyao0716.douromod.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

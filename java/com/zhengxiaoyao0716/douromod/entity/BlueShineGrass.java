@@ -1,4 +1,4 @@
-package com.zhengxiaoyao0716.douromod.entities;
+package com.zhengxiaoyao0716.douromod.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
