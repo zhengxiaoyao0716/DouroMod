@@ -12,8 +12,8 @@ public class DouroOreGen {
     private WorldGenMinable ironEssenceOreGenerator, ironOreGenerator;
     public DouroOreGen()
     {
-        ironEssenceOreGenerator = new WorldGenMinable(DouroMod.ironEssenceOre.getDefaultState(), 12);    //每个矿脉最多生成4个铁母矿
-        ironOreGenerator = new WorldGenMinable(Blocks.iron_ore.getDefaultState(), 36);                  //每个矿脉最多生成12个铁矿
+        ironEssenceOreGenerator = new WorldGenMinable(DouroMod.ironEssenceOre.getDefaultState(), 4);    //每个矿脉最多生成4个铁母矿
+        ironOreGenerator = new WorldGenMinable(Blocks.iron_ore.getDefaultState(), 12);                  //每个矿脉最多生成12个铁矿
     }
     /**
      * 可开采矿石生成监听器，这里的一个关键是其实际被触发的时间，
@@ -30,12 +30,9 @@ public class DouroOreGen {
                 for(int i = 0; i < 3; i++)          //每个区块生成3条这样的矿脉
                 {
                     event.setResult(Event.Result.DENY);
-                    BlockPos genPos = new BlockPos(
-                            event.pos.getX() + event.rand.nextInt(16),
-                            event.rand.nextInt(64),
-                            event.pos.getZ() + event.rand.nextInt(16));
-                    ironEssenceOreGenerator.generate(event.world, event.rand, genPos);
-                    ironOreGenerator.generate(event.world, event.rand, genPos);
+                    event.pos.add(event.rand.nextInt(16), event.rand.nextInt(64), event.rand.nextInt(16));
+                    ironEssenceOreGenerator.generate(event.world, event.rand, event.pos);
+                    ironOreGenerator.generate(event.world, event.rand, event.pos);
                 }break;
         }
     }

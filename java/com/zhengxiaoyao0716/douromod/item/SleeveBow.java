@@ -9,6 +9,7 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class SleeveBow extends ItemBow {
     /**
@@ -84,7 +85,7 @@ public class SleeveBow extends ItemBow {
         //if (flag || playerIn.inventory.hasItem(Items.arrow))
         //{
         float f = (float)j / 20.0F;
-        //f设为了原来的两倍（去掉了/3.0F），这样可以更快的到达必杀点
+        //f设为了原来的三倍（去掉了/3.0F），这样可以更快的到达必杀点
         f = (f * f + f * 2.0F);
         //但不代表可以立刻发射，所以发射起点x3倍以补偿
         if ((double)f < 0.3D)
@@ -97,7 +98,8 @@ public class SleeveBow extends ItemBow {
             f = 1.0F;
         }
 
-        EntityArrow entityarrow = new EntityArrow(worldIn, playerIn, f * 2.0F);
+        //袖箭的速度设置为弓箭的两倍（* 2.0F变成* 4.0f)
+        EntityArrow entityarrow = new EntityArrow(worldIn, playerIn, f * 4.0F);
         //袖箭威力暂时设置为普通弓箭10倍，因为机括类暗器发射应该更快捷
         entityarrow.setDamage(20.0D);
 

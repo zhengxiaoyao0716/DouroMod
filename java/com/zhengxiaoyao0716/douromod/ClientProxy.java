@@ -1,6 +1,7 @@
 package com.zhengxiaoyao0716.douromod;
 
 import com.zhengxiaoyao0716.douromod.control.DouroControl;
+import com.zhengxiaoyao0716.douromod.gui.CameraChange;
 import com.zhengxiaoyao0716.douromod.gui.DouroOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -26,6 +27,7 @@ public class ClientProxy extends CommonProxy {
         ItemModelMesher itemModelMesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
         //铁母矿模型
         itemModelMesher.register(Item.getItemFromBlock(DouroMod.ironEssenceOre), 0, new ModelResourceLocation(DouroMod.MODID + ":ironEssence_ore", "inventory"));
+        ModelBakery.addVariantName(Item.getItemFromBlock(DouroMod.ironEssenceOre), DouroMod.MODID + ":ironEssence_ore");
         //铁母模型
         itemModelMesher.register(DouroMod.ironEssence, 0, new ModelResourceLocation(DouroMod.MODID + ":ironEssence", "inventory"));
         //袖箭模型（手动指定3个变种）
@@ -42,5 +44,7 @@ public class ClientProxy extends CommonProxy {
         FMLCommonHandler.instance().bus().register(new DouroControl());
         //注册主屏UI，UI事件在minecraftforge里，是普通线（EVENT_BUS）
         MinecraftForge.EVENT_BUS.register(new DouroOverlay());
+        //注册视野更新事件，在minecraftforge里
+        MinecraftForge.EVENT_BUS.register(new CameraChange());
     }
 }
