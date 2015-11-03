@@ -11,8 +11,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CameraChange {
     private EntityPlayerSP playerSP;        //fovUpdateEvent会调用N多次，所以hold it
-    public CameraChange() { playerSP = Minecraft.getMinecraft().thePlayer; }
-
     /**
      * 下面这一段修改自EntityPlayerSP的getFOVMultiplier方法，感谢szszss大神在http://blog.hakugyokurou.net/?p=340这个帖子里的思路提醒.
      * @param event FOV更新事件
@@ -20,6 +18,7 @@ public class CameraChange {
     @SubscribeEvent
     public void fovUpdateEvent(FOVUpdateEvent event)
     {
+        if (playerSP == null) playerSP = Minecraft.getMinecraft().thePlayer;
         //玩家正在使用道具，且这个道具是sleeveBow，否则跳过
         if (!playerSP.isUsingItem() || playerSP.getItemInUse().getItem() != DouroMod.sleeveBow) return;
 

@@ -10,8 +10,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = DouroMod.MODID, version = DouroMod.VERSION)
+@Mod(
+        modid = DouroMod.MODID,
+        version = DouroMod.VERSION
+)
 public class DouroMod
 {
     /**ModInfo*/
@@ -32,7 +36,10 @@ public class DouroMod
     public static Entity blueShineGrass;        //蓝银草
 
     /**Proxy*/
-    @SidedProxy(clientSide = "com.zhengxiaoyao0716.douromod.ClientProxy", serverSide = "com.zhengxiaoyao0716.douromod.CommonProxy")
+    @SidedProxy(
+            clientSide = "com.zhengxiaoyao0716.douromod.ClientProxy",
+            serverSide = "com.zhengxiaoyao0716.douromod.CommonProxy"
+    )
     public static CommonProxy proxy;
 
     @EventHandler
@@ -49,5 +56,14 @@ public class DouroMod
     public void postInit(FMLPostInitializationEvent event)
     {
         proxy.postInit(event);
+    }
+
+    /**
+     * 服务端开始中.
+     * @param event Do stuff you need to do to set up the server. register commands, tweak the server.
+     */
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        proxy.registerCommend(event);
     }
 }

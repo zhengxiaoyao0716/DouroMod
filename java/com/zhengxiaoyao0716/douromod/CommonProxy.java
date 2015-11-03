@@ -1,9 +1,11 @@
 package com.zhengxiaoyao0716.douromod;
 
 import com.zhengxiaoyao0716.douromod.block.IronEssenceOre;
+import com.zhengxiaoyao0716.douromod.entity.player.DouroSoul;
 import com.zhengxiaoyao0716.douromod.item.IronEssence;
 import com.zhengxiaoyao0716.douromod.item.SleeveBow;
 import com.zhengxiaoyao0716.douromod.world.DouroWorldGenerator;
+import net.minecraft.command.ServerCommandManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -11,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -39,5 +42,15 @@ public class CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {
         //注册生成矿石监听，Gen事件是在minecraftforge里的，且显然是ORE_GEN_BUS线
         //MinecraftForge.ORE_GEN_BUS.register(new DouroOreGen());           //不用了，换成生成巨型铁矿
+    }
+
+    /**
+     * 注册指令.
+     * @param event Do stuff you need to do to set up the server. register commands, tweak the server.
+     */
+    public void registerCommend(FMLServerStartingEvent event)
+    {
+        ServerCommandManager commandManager = (ServerCommandManager) event.getServer().getCommandManager();
+        commandManager.registerCommand(new DouroSoul.dataCommand());
     }
 }
